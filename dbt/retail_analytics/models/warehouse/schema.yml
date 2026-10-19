@@ -1,0 +1,77 @@
+version: 2
+
+models:
+  - name: dim_date
+    description: Calendar dimension copied from the verified warehouse layer.
+    columns:
+      - name: date_key
+        tests:
+          - not_null
+          - unique
+      - name: date
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_product
+    description: Source-aware product and department dimension.
+    columns:
+      - name: product_key
+        tests:
+          - not_null
+          - unique
+      - name: source_system
+        tests:
+          - accepted_values:
+              values: ["online_retail", "walmart"]
+
+  - name: dim_customer
+    description: Source-aware customer profile dimension.
+    columns:
+      - name: customer_key
+        tests:
+          - not_null
+          - unique
+      - name: source_system
+        tests:
+          - accepted_values:
+              values: ["online_retail", "walmart"]
+
+  - name: dim_store
+    description: Source-aware store and channel dimension.
+    columns:
+      - name: store_key
+        tests:
+          - not_null
+          - unique
+      - name: source_system
+        tests:
+          - accepted_values:
+              values: ["online_retail", "walmart"]
+
+  - name: fact_sales
+    description: Central sales fact copied from the verified warehouse layer.
+    columns:
+      - name: sales_key
+        tests:
+          - not_null
+          - unique
+      - name: source_record_id
+        tests:
+          - not_null
+      - name: source_system
+        tests:
+          - accepted_values:
+              values: ["online_retail", "walmart"]
+      - name: date_key
+        tests:
+          - not_null
+      - name: product_key
+        tests:
+          - not_null
+      - name: customer_key
+        tests:
+          - not_null
+      - name: store_key
+        tests:
+          - not_null

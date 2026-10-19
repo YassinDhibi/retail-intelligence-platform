@@ -1,0 +1,66 @@
+version: 2
+
+models:
+  - name: sales_overview
+    description: Monthly sales KPI mart for executive reporting.
+    columns:
+      - name: month_start_date
+        tests:
+          - not_null
+      - name: source_system
+        tests:
+          - accepted_values:
+              values: ["online_retail", "walmart"]
+      - name: total_revenue
+        tests:
+          - not_null
+
+  - name: product_performance
+    description: Product and department performance mart.
+    columns:
+      - name: product_key
+        tests:
+          - not_null
+          - unique
+      - name: total_revenue
+        tests:
+          - not_null
+
+  - name: customer_performance
+    description: Customer profile performance mart.
+    columns:
+      - name: customer_key
+        tests:
+          - not_null
+          - unique
+      - name: customer_segment
+        tests:
+          - accepted_values:
+              values: ["unknown", "high_value", "standard", "low_value"]
+
+  - name: store_performance
+    description: Store and channel performance mart.
+    columns:
+      - name: store_key
+        tests:
+          - not_null
+          - unique
+      - name: total_revenue
+        tests:
+          - not_null
+
+  - name: forecasting_base
+    description: Weekly Walmart forecasting base mart.
+    columns:
+      - name: date
+        tests:
+          - not_null
+      - name: store_id
+        tests:
+          - not_null
+      - name: product_id
+        tests:
+          - not_null
+      - name: revenue
+        tests:
+          - not_null

@@ -1,0 +1,23 @@
+name: retail_analytics
+version: "1.0.0"
+config-version: 2
+
+profile: retail_analytics
+
+model-paths: ["models"]
+macro-paths: ["macros"]
+clean-targets:
+  - target
+  - dbt_packages
+
+models:
+  retail_analytics:
+    staging:
+      +schema: dbt_staging
+      +materialized: view
+    warehouse:
+      +schema: dbt_warehouse
+      +materialized: table
+    marts:
+      +schema: dbt_marts
+      +materialized: view

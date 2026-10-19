@@ -1,0 +1,71 @@
+version: 2
+
+models:
+  - name: stg_online_retail_transactions
+    description: Cleaned Online Retail invoice-line transactions from the SQL staging layer.
+    columns:
+      - name: transaction_line_id
+        tests:
+          - not_null
+          - unique
+      - name: invoice_no
+        tests:
+          - not_null
+      - name: stock_code
+        tests:
+          - not_null
+      - name: sales_amount
+        tests:
+          - not_null
+      - name: source_system
+        tests:
+          - accepted_values:
+              values: ["online_retail"]
+
+  - name: stg_walmart_sales
+    description: Cleaned Walmart weekly sales observations from the SQL staging layer.
+    columns:
+      - name: walmart_sales_id
+        tests:
+          - not_null
+          - unique
+      - name: store_id
+        tests:
+          - not_null
+      - name: department_id
+        tests:
+          - not_null
+      - name: dataset_split
+        tests:
+          - accepted_values:
+              values: ["train", "test"]
+      - name: source_system
+        tests:
+          - accepted_values:
+              values: ["walmart"]
+
+  - name: stg_walmart_stores
+    description: Cleaned Walmart store attributes.
+    columns:
+      - name: store_id
+        tests:
+          - not_null
+          - unique
+      - name: store_type
+        tests:
+          - accepted_values:
+              values: ["A", "B", "C"]
+
+  - name: stg_walmart_features
+    description: Cleaned Walmart feature rows by store and date.
+    columns:
+      - name: walmart_feature_id
+        tests:
+          - not_null
+          - unique
+      - name: store_id
+        tests:
+          - not_null
+      - name: feature_date
+        tests:
+          - not_null

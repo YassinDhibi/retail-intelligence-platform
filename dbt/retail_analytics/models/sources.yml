@@ -1,0 +1,37 @@
+version: 2
+
+sources:
+  - name: raw
+    schema: raw
+    tables:
+      - name: online_retail_clean
+      - name: walmart_train_clean
+      - name: walmart_test_clean
+      - name: walmart_stores_clean
+      - name: walmart_features_clean
+
+  - name: staging
+    schema: staging
+    tables:
+      - name: stg_online_retail_transactions
+      - name: stg_walmart_sales
+      - name: stg_walmart_stores
+      - name: stg_walmart_features
+
+  - name: warehouse
+    schema: warehouse
+    tables:
+      - name: dim_date
+      - name: dim_product
+      - name: dim_customer
+      - name: dim_store
+      - name: fact_sales
+
+  - name: marts
+    schema: marts
+    tables:
+      - name: sales_overview
+      - name: product_performance
+      - name: customer_performance
+      - name: store_performance
+      - name: forecasting_base
